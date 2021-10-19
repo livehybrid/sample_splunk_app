@@ -1,0 +1,14 @@
+[app/install/state]
+version = 8.2.1
+modtime = 1633507520.048072000
+
+[inputs/charger_stats%3A%2F%2Ftest]
+version = 8.2.1
+modtime = 1633533148.384435000
+
+[views/engenie_chargers]
+access = read : [ * ], write : [ power ]
+export = none
+owner = admin
+version = 8.2.1
+modtime = 1633640539.242463000

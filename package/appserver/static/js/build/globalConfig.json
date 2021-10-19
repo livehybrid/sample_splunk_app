@@ -1,0 +1,10 @@
+{
+    "meta": {
+        "name": "sample_splunk_app",
+        "displayName": "EV Chargers",
+        "version": "1.0.0",
+        "apiVersion": "3.0.0",
+        "restRoot": "sample_splunk_app"
+    },
+    "pages": {}
+}

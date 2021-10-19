@@ -1,0 +1,6 @@
+#default/eventgen.conf
+local
+#default/pytest-splunk-addon-data.conf
+#samples
+local
+metadata/local.meta

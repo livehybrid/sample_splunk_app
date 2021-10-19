@@ -1,0 +1,12 @@
+__pycache__
+output/
+output
+**/*.pyc
+tmp
+helmut.log
+pytest_splunk_addon.log
+generator.lock
+*.lock
+.tokenized_events
+dist
+.idea

@@ -1,0 +1,6 @@
+[submodule "_submodules/addonfactory_test_matrix_splunk"]
+	path = _submodules/addonfactory_test_matrix_splunk
+	url = https://github.com/splunk/addonfactory_test_matrix_splunk
+[submodule "_submodules/0_cicd_base"]
+	path = _submodules/0_cicd_base
+	url = git@github.com:livehybrid/0_cicd_base.git

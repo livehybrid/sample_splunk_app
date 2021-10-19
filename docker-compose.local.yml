@@ -1,0 +1,7 @@
+
+services:
+  splunk:
+    ports:
+      - "8000" # Web UI
+      - "8088" # HEC
+      - "8089" # REST API

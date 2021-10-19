@@ -1,0 +1,56 @@
+include:
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
+
+stages:
+  - test
+  - package
+  - cleanup
+
+image: public.ecr.aws/h4r3p6c8/gitlab-cimg:3.8.3
+cache:
+  key:
+    files:
+      - poetry.lock
+  paths:
+    - .venv/
+    - venv/
+
+before_script:
+  - python -V  # Print out python version for debugging
+  - make git-init-submodules
+  - make install
+
+
+pytest:
+  stage: test
+  script:
+    - make docker-build
+    - make build
+    - make up-ci
+    - make test SPLUNK_HOST=172.17.0.1
+  artifacts:
+    reports:
+      junit: tmp/reports/**/*.xml
+  tags:
+    - DedicatedCICDRunner
+
+package:
+  stage: package
+  script:
+    - make dist
+  artifacts:
+    paths:
+      - dist
+    reports:
+      junit: tmp/reports/**/*.xml
+  tags:
+    - DedicatedCICDRunner
+
+cleanup_job:
+  stage: cleanup
+  script:
+    - make down
+  when: always
+  tags:
+    - DedicatedCICDRunner

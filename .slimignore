@@ -1,0 +1,6 @@
+.DS_Store
+eventgen.conf
+pytest-splunk-addon-data.conf
+samples
+local
+metadata/local.meta

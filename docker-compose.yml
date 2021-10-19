@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+
+  splunk:
+    build:
+      dockerfile: ./docker/splunk/Dockerfile
+      context: ./
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=Chang3d!
+      - SPLUNK_HEC_TOKEN=abcd1234
+    volumes:
+      - "./output/app:/opt/splunk/etc/apps/${APP_ID}"

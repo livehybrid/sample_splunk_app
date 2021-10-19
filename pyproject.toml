@@ -1,0 +1,84 @@
+[tool.poetry]
+name = "sample_splunk_app"
+version = "0.1.0"
+description = "Sample Splunk App that collects data from an API"
+authors = ["Will Searle <will@splunk.engineer>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+cached-property = "^1.5.2"
+
+[tool.poetry.dev-dependencies]
+coverage = "*"
+crudini = "^0.9.3"
+docker-compose = "^1.29.2"
+future = "*"
+lovely-pytest-docker = "*"
+mock = "*"
+pytest = "*"
+pytest-expect = "*"
+pytest-html = "*"
+pytest-ordering = "*"
+pytest-rerunfailures = "*"
+pytest-splunk-addon = "==1.9.2"
+pytest-splunk-addon-ui-smartx = "==2.0.6"
+pytest-xdist = "*"
+requests = "*"
+reuse = "*"
+six = "*"
+splunk-add-on-ucc-framework = "*"
+# todo: remove the path reference when this installs in a virtualenv ok
+splunk-packaging-toolkit = {url = "https://github.com/NHSDigital/splunk-packaging-toolkit-whl/releases/download/v2021.09.26.10.44/splunk_packaging_toolkit-1.0.1-py3-none-any.whl"}
+splunk-sdk = "*"
+u-msgpack-python = "*"
+versioningit = "^0.2.1"
+wheel = "*"
+
+
+[tool.pytest.ini_options]
+python_files = "*_tests.py test_*.py"
+norecursedirs = ".git .venv venv build deps tests/deps node_modules package"
+addopts = """-v
+    --tb=long
+    --splunk-app=./package
+    --splunk-data-generator=./package/default
+    --splunk-type=external
+    --splunk-hec-token=abcd1234
+    --event-file-path=tmp/events.pickle
+    --sc4s-host=sc4s
+    --junitxml=tmp/reports/xml/test.xml
+    --cim-report=tmp/reports/cim-compliance-report.md
+    --html=tmp/reports/html/test.html
+    -n 1
+"""
+#   --discard-eventlogs
+
+filterwarnings = [
+    "ignore::DeprecationWarning"
+]
+testpaths = [
+    "tests"
+]
+
+[tool.versioningit.vcs]
+method = "git"
+default-tag = "0.1.0"
+
+[tool.versioningit.next-version]
+method = "minor-release"
+
+[tool.versioningit.format]
+distance = "{version}{distance:02d}"
+dirty = "{version}+dirty"
+distance-dirty = "{version}{distance:02d}"
+#distance = "{version}.post{distance}+{vcs}{rev}"
+#dirty = "{version}+dirty"
+#distance-dirty = "{version}.post{distance}+{vcs}{rev}.dirty"
+
+[build-system]
+requires = [
+    "poetry>=1.0.0",
+    "versioningit >= 0.2.1"
+]
+build-backend = "poetry.masonry.api"
