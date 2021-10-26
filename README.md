@@ -2,7 +2,7 @@
 
 Welcome to this sample application to help get you started using CI/CD for building your Splunk Apps.
 
-If you havent already, check out the accomanying Splunk .conf2021 talk at https://conf.splunk.com/learn/session-scheduler.html/?search=DEV1560b
+If you havent already, check out the accomanying Splunk .conf2021 talk at https://conf.splunk.com/files/2021/recordings/DEV1560B.mp4 (PDF at https://conf.splunk.com/files/2021/slides/DEV1560B.pdf)
 
 For more great Splunk Developer breakouts check out https://www.splunk.com/en_us/blog/conf-splunklive/great-breakouts-for-splunk-developers-at-conf21.html
 
