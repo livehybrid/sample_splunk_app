@@ -6,10 +6,11 @@ authors = ["Will Searle <will@splunk.engineer>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.7,<3.10"
 cached-property = "^1.5.2"
+versioningit = "^2.1.0"
 
-[tool.poetry.dev-dependencies]
+#[tool.poetry.dev-dependencies]
 coverage = "*"
 crudini = "^0.9.3"
 docker-compose = "^1.29.2"
@@ -32,8 +33,9 @@ splunk-add-on-ucc-framework = "*"
 splunk-packaging-toolkit = {url = "https://github.com/NHSDigital/splunk-packaging-toolkit-whl/releases/download/v2021.09.26.10.44/splunk_packaging_toolkit-1.0.1-py3-none-any.whl"}
 splunk-sdk = "*"
 u-msgpack-python = "*"
-versioningit = "^0.2.1"
 wheel = "*"
+splunk-appinspect = "^2.30.0"
+typing-extensions = "^4.4.0"
 
 
 [tool.pytest.ini_options]

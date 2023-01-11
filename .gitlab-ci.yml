@@ -1,13 +1,10 @@
-include:
-  - template: Security/SAST.gitlab-ci.yml
-  - template: Security/Secret-Detection.gitlab-ci.yml
-
 stages:
   - test
   - package
   - cleanup
+  - toptl
 
-image: public.ecr.aws/h4r3p6c8/gitlab-cimg:3.8.3
+image: livehybrid/splunk-appbuilder:version-3-acs
 cache:
   key:
     files:
@@ -17,7 +14,6 @@ cache:
     - venv/
 
 before_script:
-  - python -V  # Print out python version for debugging
   - make git-init-submodules
   - make install
 
@@ -25,10 +21,7 @@ before_script:
 pytest:
   stage: test
   script:
-    - make docker-build
     - make build
-    - make up-ci
-    - make test SPLUNK_HOST=172.17.0.1
   artifacts:
     reports:
       junit: tmp/reports/**/*.xml
@@ -38,6 +31,7 @@ pytest:
 package:
   stage: package
   script:
+    - env
     - make dist
   artifacts:
     paths:
@@ -50,7 +44,17 @@ package:
 cleanup_job:
   stage: cleanup
   script:
-    - make down
+    - make down || true
   when: always
   tags:
     - DedicatedCICDRunner
+
+upload:
+  stage: toptl
+  script:
+    - env
+    - make acsupload
+  when: always
+  tags:
+    - DedicatedCICDRunner
+

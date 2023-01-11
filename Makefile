@@ -75,7 +75,8 @@ install: ## Run repo installation (Poetry install)
 update: ## Update poetry as per local config
 	poetry update
 
-docker-build: ## Build Splunk docker container ready for side-loading of application and testing
+docker-build:  ## Build Splunk docker container ready for side-loading of application and testing
+docker-build: APP_ID
 	@\
 	COMPOSE_DOCKER_CLI_BUILD=1 \
 	DOCKER_BUILDKIT=1 \
@@ -93,6 +94,7 @@ up: APP_ID
 	APP_ID=${APP_ID} poetry run docker-compose -f docker-compose.yml -f docker-compose.local.yml up -d
 	poetry run scripts/wait-for-log-line.sh splunk 'Ansible playbook complete'
 
+up-ci: APP_ID
 up-ci: ## Start docker containers (CI Only)
 	poetry run scripts/ci-up.sh $(APP_ID)
 
@@ -115,11 +117,14 @@ build: clean-build APP_ID
 release: ## Create application release
 release: dist APP_ID
 
+acsupload: ## Upload to Admin Config Service (ACS)
+	poetry run ./scripts/acscli_upload.sh
+
 dist: build
 	mv output/app output/$(APP_ID)
 	@echo "packaging"
 	mkdir -p tmp/reports
-	poetry run scripts/package.sh
+	poetry run scripts/package.sh output
 	mv output/$(APP_ID) output/app
 
 splunk-ports:
