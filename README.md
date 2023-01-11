@@ -68,7 +68,8 @@ Note - The Makefile may contain more than the commands listed below, however som
 | make up-ci               | Start docker containers (CI Only)                            |
 | make test                | Run PyTest against the Splunk application                    |
 | make build               | Determine if UCC/Basic application and create app output     |
-| make release             | Create application release                                   |
+| make release             | Create application release                        |
+| make acsupload           | Upload to Splunk Cloud using Admin Config Service (ACS) CLI  |
 | make splunk-ports-output | Print dynamic docker Splunk ports (Web/REST/HEC) to stdout   |
 | make splunk-cloud-upload | Upload application to SplunkCloud - Requires stack=<stackName> |
 
@@ -128,6 +129,13 @@ Due to the sharing of state/cache between stages you may need to run all stages 
 #### GitHub
 
 There are currently no example GitHub pipelines, however this would largely follow the same pattern as the GitLab pipeline defined in `.gitlab-ci.yml`
+
+#### ACS-CLI Upload
+In order to use ACS Upload you need to provide the following variables:  
+* ACS_STACK = Name of your Splunk Cloud Stack
+* ACS_TOKEN = Valid sc_admin user token
+* SPLUNK_USERNAME = splunk.com username (for sending to appinspect)
+* SPLUNK_PASSWORD = splunk.com password
 
 ## Further Reading
 
